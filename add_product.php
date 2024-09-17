@@ -34,10 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $salmonella = isset($_POST['salmonella']) ? 1 : 0;
     $escherichia_coli = isset($_POST['escherichia_coli']) ? 1 : 0;
     $staphylococcus_aureus = isset($_POST['staphylococcus_aureus']) ? 1 : 0;
+    $sodium_ascorbate = $_POST['sodium_ascorbate'];
+    $zinc_sulfate = $_POST['zinc_sulfate']; 
+    $first_test = $_POST['first_test']; 
 
     // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO products (product_name, brand_name, lot_no, mfg_date, expiry_date, packing, storage_temp, rh, description, identification, weight, disintegration_time, moisture_content, dosage_unit, bacterial_count, molds_yeast_count, salmonella, escherichia_coli, staphylococcus_aureus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
-    $stmt->bind_param("ssssssssssddsiiiiis", $product_name, $brand_name, $lot_no, $mfg_date, $expiry_date, $packing, $storage_temp, $rh, $description, $identification, $weight, $disintegration_time, $moisture_content, $dosage_unit, $bacterial_count, $molds_yeast_count, $salmonella, $escherichia_coli, $staphylococcus_aureus);
+    $stmt = $conn->prepare("INSERT INTO products (product_name, brand_name, lot_no, mfg_date, expiry_date, packing, storage_temp, rh, description, identification, weight, disintegration_time, moisture_content, dosage_unit, bacterial_count, molds_yeast_count, salmonella, escherichia_coli, staphylococcus_aureus, sodium_ascorbate,zinc_sulfate,first_test) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)");
+    $stmt->bind_param("ssssssssssddsiiiiissss", $product_name, $brand_name, $lot_no, $mfg_date, $expiry_date, $packing, $storage_temp, $rh, $description, $identification, $weight, $disintegration_time, $moisture_content, $dosage_unit, $bacterial_count, $molds_yeast_count, $salmonella, $escherichia_coli, $staphylococcus_aureus, $sodium_ascorbate, $zinc_sulfate, $first_test);
 
     // Execute the query
     if ($stmt->execute()) {
